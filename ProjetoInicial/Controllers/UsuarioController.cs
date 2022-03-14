@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjetoInicial.Data;
 using ProjetoInicial.Factories;
 using ProjetoInicial.Models.Entidades;
 
 namespace ProjetoInicial.Controllers
 {
-
-
     [ApiController]
     [Route("")]
     public class UsuarioController : Controller
@@ -33,15 +32,20 @@ namespace ProjetoInicial.Controllers
                 var NovoUsuario = _factory.Criar(usuario);
                 context.Add(NovoUsuario);
                 context.SaveChanges();
-                return Ok(context);
+                return Ok();
             }
             catch (Exception)
             {
-
                 return BadRequest();
             }
 
         }
+
+        [HttpGet("listarusuariosasync")]
+        public async Task<ActionResult> ListarTodosAsync([FromServices] UsuarioContext context)
+          =>  Ok(await context.Usuario.ToListAsync());
+
+
 
     }
 }
