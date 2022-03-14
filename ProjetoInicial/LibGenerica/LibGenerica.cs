@@ -3,7 +3,7 @@
     public class LibGenerica : ILibGenerica
     {
         public string GeraCodigo() =>
-            Guid.NewGuid().ToString().ToUpper()[..10];
+            Guid.NewGuid().ToString().ToUpper()[..8];
         
     }
 }

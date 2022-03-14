@@ -23,16 +23,18 @@ namespace ProjetoInicial.Controllers
             return Ok();
         }
 
+        //Não é o correto manipulação de persistência dentro das controllers
+        //Visto que quebra o padrão de responsabilidade única, refatorar para uso de serviços de acesso a dados.
         [HttpPost("add")]
-        public ActionResult AdicionarUsuario([FromBody] Usuario usuario)
+        public async Task<ActionResult> AdicionarUsuarioAsync([FromBody] Usuario usuario)
         {
             try
             {
                 var context = new UsuarioContext();
                 var NovoUsuario = _factory.Criar(usuario);
-                context.Add(NovoUsuario);
-                context.SaveChanges();
-                return Ok();
+                await context.AddAsync(NovoUsuario);
+                await context.SaveChangesAsync();
+                return Created($"buscarusuarioporcodigo{NovoUsuario.Codigo}", NovoUsuario);
             }
             catch (Exception)
             {
@@ -44,7 +46,17 @@ namespace ProjetoInicial.Controllers
         public async Task<ActionResult> ListarTodosAsync([FromServices] UsuarioContext context)
           => Ok(await context.Usuario.ToListAsync());
 
+        [HttpGet("buscarusuarioporcodigo/{codigo}")]
+        public async Task<ActionResult> BuscarUsuarioPorCodigo(
+            [FromServices] UsuarioContext context,
+            [FromRoute] string codigo)
+         => Ok(await context.Usuario.Where(a => a.Codigo == codigo).ToListAsync());
 
+        [HttpGet("buscarusuarioporid/{id}")]
+        public async Task<ActionResult> BuscarUsuarioPorId(
+           [FromServices] UsuarioContext context,
+           [FromRoute] Guid id)
+        => Ok(await context.Usuario.Where(a => a.Id == id).ToListAsync());
 
     }
 }
