@@ -38,12 +38,11 @@ namespace ProjetoInicial.Controllers
             {
                 return BadRequest();
             }
-
         }
 
         [HttpGet("listarusuariosasync")]
         public async Task<ActionResult> ListarTodosAsync([FromServices] UsuarioContext context)
-          =>  Ok(await context.Usuario.ToListAsync());
+          => Ok(await context.Usuario.ToListAsync());
 
 
 
