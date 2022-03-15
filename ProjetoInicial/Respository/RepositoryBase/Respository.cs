@@ -2,11 +2,11 @@
 
 namespace ProjetoInicial.Respository.RepositoryBase
 {
-    public class Respository<T> : IDisposable, IRepository<T> where T : class
+    public class Repository<T> : IDisposable, IRepository<T> where T : class
     {
         protected readonly DbContext Context;
 
-        public Respository(DbContext contexto)
+        public Repository(DbContext contexto)
         {
             this.Context = contexto;
         }
