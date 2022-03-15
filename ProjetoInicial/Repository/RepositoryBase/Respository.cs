@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ProjetoInicial.Respository.RepositoryBase
+namespace ProjetoInicial.Repository.RepositoryBase
 {
     public class Repository<T> : IDisposable, IRepository<T> where T : class
     {
