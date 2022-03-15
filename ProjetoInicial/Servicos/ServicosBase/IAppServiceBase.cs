@@ -1,12 +1,11 @@
 ﻿namespace ProjetoInicial.Servicos
 {
-    public interface IAppServiceBase
+    public interface IAppServiceBase<T> where T : class
     {
-        void Gravar();
+        void Novo(T item);
         IQueryable Pesquisar();
-        void Remover();
-        void Atualizar();
-        void Alterar();
+        void Remover(T item);
+        void Alterar(T item);
 
     }
 }
