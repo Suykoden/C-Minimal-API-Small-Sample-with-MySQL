@@ -1,6 +1,6 @@
-﻿namespace ProjetoInicial.Models.ClassesBase
+﻿namespace ProjetoInicial.DTOs.DTOBase
 {
-    public abstract class EntidadeBase : IPossuiId
+    public interface IDtoBase
     {
         public Guid Id { get; set; }
         public string Codigo { get; set; }
