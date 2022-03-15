@@ -47,13 +47,13 @@ namespace ProjetoInicial.Controllers
           => Ok(await context.Usuario.ToListAsync());
 
         [HttpGet("buscarusuarioporcodigo/{codigo}")]
-        public async Task<ActionResult> BuscarUsuarioPorCodigo(
+        public async Task<ActionResult> BuscarUsuarioPorCodigoAsync(
             [FromServices] UsuarioContext context,
             [FromRoute] string codigo)
          => Ok(await context.Usuario.Where(a => a.Codigo == codigo).ToListAsync());
 
         [HttpGet("buscarusuarioporid/{id}")]
-        public async Task<ActionResult> BuscarUsuarioPorId(
+        public async Task<ActionResult> BuscarUsuarioPorIdAsync(
            [FromServices] UsuarioContext context,
            [FromRoute] Guid id)
         => Ok(await context.Usuario.Where(a => a.Id == id).ToListAsync());
