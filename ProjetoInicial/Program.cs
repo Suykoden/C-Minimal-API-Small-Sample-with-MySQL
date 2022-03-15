@@ -4,7 +4,7 @@ using ProjetoInicial.Data;
 using ProjetoInicial.Factories;
 using ProjetoInicial.LibGenerica;
 using ProjetoInicial.Models.Entidades;
-using ProjetoInicial.Respository.Usuarios;
+using ProjetoInicial.Repository.Usuarios;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

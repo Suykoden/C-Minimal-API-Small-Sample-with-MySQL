@@ -1,6 +1,6 @@
 ﻿using ProjetoInicial.Factories;
 using ProjetoInicial.Models.ClassesBase;
-using ProjetoInicial.Respository;
+using ProjetoInicial.Repository;
 
 namespace ProjetoInicial.Servicos.ServicosBase
 {
