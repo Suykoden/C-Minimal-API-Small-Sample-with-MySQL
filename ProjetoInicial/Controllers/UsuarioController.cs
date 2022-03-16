@@ -11,12 +11,12 @@ namespace ProjetoInicial.Controllers
     [Route("")]
     public class UsuarioController : Controller
     {
-       // private readonly IFactoryBase<Usuario> _factory;
+        // private readonly IFactoryBase<Usuario> _factory;
         private readonly IUsuarioAppService _usuarioAppService;
 
         public UsuarioController(IUsuarioAppService usuarioAppService)
         {
-          //  _factory = factoryBase;
+            //  _factory = factoryBase;
             _usuarioAppService = usuarioAppService;
         }
 
@@ -26,18 +26,12 @@ namespace ProjetoInicial.Controllers
             return Ok();
         }
 
-        //Não é o correto manipulação de persistência dentro das controllers
-        //Visto que quebra o padrão de responsabilidade única, refatorar para uso de serviços de acesso a dados.
         [HttpPost("add")]
         public async Task<ActionResult> AdicionarUsuarioAsync([FromBody] Usuario usuario)
         {
             try
             {
-                // var context = new UsuarioContext();
-                //   var NovoUsuario = _factory.Criar(usuario);
-                // await context.AddAsync(NovoUsuario);
-                //   await context.SaveChangesAsync();
-                var NovoUsuario =   await _usuarioAppService.NovoAsync(usuario);
+                var NovoUsuario = await _usuarioAppService.NovoAsync(usuario);
                 return Created($"buscarusuarioporcodigo{NovoUsuario.Codigo}", NovoUsuario);
             }
             catch (Exception)
@@ -47,18 +41,18 @@ namespace ProjetoInicial.Controllers
         }
 
         [HttpGet("listarusuariosasync")]
-        public async Task<ActionResult> ListarTodosAsync([FromServices] UsuarioContext context)
+        public async Task<ActionResult> ListarTodosAsync([FromServices] Context context)
           => Ok(await context.Usuario.ToListAsync());
 
         [HttpGet("buscarusuarioporcodigo/{codigo}")]
         public async Task<ActionResult> BuscarUsuarioPorCodigoAsync(
-            [FromServices] UsuarioContext context,
+            [FromServices] Context context,
             [FromRoute] string codigo)
          => Ok(await context.Usuario.Where(a => a.Codigo == codigo).ToListAsync());
 
         [HttpGet("buscarusuarioporid/{id}")]
         public async Task<ActionResult> BuscarUsuarioPorIdAsync(
-           [FromServices] UsuarioContext context,
+           [FromServices] Context context,
            [FromRoute] Guid id)
         => Ok(await context.Usuario.Where(a => a.Id == id).ToListAsync());
 

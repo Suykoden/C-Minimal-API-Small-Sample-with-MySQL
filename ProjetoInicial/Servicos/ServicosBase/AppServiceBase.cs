@@ -31,7 +31,7 @@ namespace ProjetoInicial.Servicos.ServicosBase
         public Task<T> NovoAsync(T item)
         {
             _repository.Add(_factory.Criar(item));
-            return Task.Run(() => item);
+            return  Task.Run(()=> item);
         }
     }
 }

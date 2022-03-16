@@ -1,51 +1,48 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjetoInicial.Data;
 
 namespace ProjetoInicial.Repository.RepositoryBase
 {
     public class Repository<T> : IDisposable, IRepository<T> where T : class
     {
-        protected readonly DbContext Context;
+        protected Context _context = new Context();
 
-        public Repository(DbContext contexto)
-        {
-            this.Context = contexto;
-        }
         public void Add(T item)
         {
-            Context.Set<T>().Add(item);
-            Context.SaveChanges();
+            _context.Set<T>().Add(item);
+            _context.SaveChanges();
         }
 
         public IQueryable<T> All()
         {
-            return Context.Set<T>();
+            return _context.Set<T>();
         }
 
         public void Commit()
         {
-            Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Delete(T item)
         {
-            Context.Set<T>().Remove(item);
-            Context.SaveChanges();
+            _context.Set<T>().Remove(item);
+            _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            Context.Dispose();
+            _context.Dispose();
         }
 
         public void Update(T item)
         {
-            Context.Entry(Update).State = EntityState.Modified;
-            Context.SaveChanges();
+            _context.Entry(Update).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public T GetById(object id)
         {
-            return Context.Set<T>().Find(id);
+            return _context.Set<T>().Find(id);
         }
     }
 }

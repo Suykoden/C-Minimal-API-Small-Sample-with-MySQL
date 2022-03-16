@@ -5,7 +5,7 @@ using ProjetoInicial.Models.Entidades;
 
 namespace ProjetoInicial.Data
 {
-    public class UsuarioContext : DbContext
+    public class Context : DbContext
     {
         public DbSet<Usuario> Usuario { get; set; }
 

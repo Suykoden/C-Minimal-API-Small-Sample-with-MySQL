@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProjetoInicial.Data;
 using ProjetoInicial.Factories;
@@ -11,12 +12,14 @@ using ProjetoInicial.Servicos.UsuarioServices;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-builder.Services.AddDbContext<UsuarioContext>();
+builder.Services.AddDbContext<Context>();
 
 builder.Services.AddScoped<ILibGenerica, LibGenerica>();
 builder.Services.AddScoped<IFactoryBase<Usuario>, UsuarioFactory>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioAppService, UsuarioAppService>();
+builder.Services.AddScoped<IRepository<Usuario>, Repository<Usuario>>();
+
 
 
 builder.Services.AddSwaggerGen(c =>

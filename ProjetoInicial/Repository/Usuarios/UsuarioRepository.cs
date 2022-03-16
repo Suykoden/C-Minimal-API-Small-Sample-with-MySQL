@@ -6,8 +6,5 @@ namespace ProjetoInicial.Repository.Usuarios
 {
     public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
-        public UsuarioRepository() : base(new UsuarioContext())
-        {
-        }
     }
 }
