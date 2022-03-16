@@ -1,7 +1,8 @@
-﻿namespace ProjetoInicial.Servicos.UsuarioServices
+﻿using ProjetoInicial.Models.Entidades;
+
+namespace ProjetoInicial.Servicos.UsuarioServices
 {
-    public interface IUsuarioAppService
+    public interface IUsuarioAppService: IAppServiceBase<Usuario>
     {
-        IQueryable Pesquisar();
     }
 }

@@ -6,6 +6,7 @@
         IQueryable Pesquisar();
         void Remover(T item);
         void Alterar(T item);
+        Task<T> NovoAsync(T item);
 
     }
 }

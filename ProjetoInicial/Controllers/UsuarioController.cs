@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjetoInicial.Data;
 using ProjetoInicial.Factories;
 using ProjetoInicial.Models.Entidades;
+using ProjetoInicial.Servicos.UsuarioServices;
 
 namespace ProjetoInicial.Controllers
 {
@@ -10,11 +11,13 @@ namespace ProjetoInicial.Controllers
     [Route("")]
     public class UsuarioController : Controller
     {
-        private readonly IFactoryBase<Usuario> _factory;
+       // private readonly IFactoryBase<Usuario> _factory;
+        private readonly IUsuarioAppService _usuarioAppService;
 
-        public UsuarioController(IFactoryBase<Usuario> factoryBase)
+        public UsuarioController(IUsuarioAppService usuarioAppService)
         {
-            _factory = factoryBase;
+          //  _factory = factoryBase;
+            _usuarioAppService = usuarioAppService;
         }
 
         [HttpGet("teste")]
@@ -30,10 +33,11 @@ namespace ProjetoInicial.Controllers
         {
             try
             {
-                var context = new UsuarioContext();
-                var NovoUsuario = _factory.Criar(usuario);
-                await context.AddAsync(NovoUsuario);
-                await context.SaveChangesAsync();
+                // var context = new UsuarioContext();
+                //   var NovoUsuario = _factory.Criar(usuario);
+                // await context.AddAsync(NovoUsuario);
+                //   await context.SaveChangesAsync();
+                var NovoUsuario =   await _usuarioAppService.NovoAsync(usuario);
                 return Created($"buscarusuarioporcodigo{NovoUsuario.Codigo}", NovoUsuario);
             }
             catch (Exception)

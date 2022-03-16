@@ -27,6 +27,11 @@ namespace ProjetoInicial.Servicos.ServicosBase
 
         public void Remover(T item)
          => _repository.Delete(_repository.GetById(item.Id));
-       
+
+        public Task<T> NovoAsync(T item)
+        {
+            _repository.Add(_factory.Criar(item));
+            return Task.Run(() => item);
+        }
     }
 }
