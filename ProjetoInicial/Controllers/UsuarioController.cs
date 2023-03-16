@@ -42,19 +42,36 @@ namespace ProjetoInicial.Controllers
 
         [HttpGet("listarusuariosasync")]
         public async Task<ActionResult> ListarTodosAsync([FromServices] Context context)
-          => Ok(await context.Usuario.ToListAsync());
+        {
+            try
+            {
+                var teste = await context.Usuario.ToListAsync();
+                return Ok(teste);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpGet("buscarusuarioporcodigo/{codigo}")]
         public async Task<ActionResult> BuscarUsuarioPorCodigoAsync(
-            [FromServices] Context context,
-            [FromRoute] string codigo)
-         => Ok(await context.Usuario.Where(a => a.Codigo == codigo).ToListAsync());
+        [FromServices] Context context,
+        [FromRoute] string codigo)
+     => Ok(await context.Usuario.Where(a => a.Codigo == codigo).ToListAsync());
 
         [HttpGet("buscarusuarioporid/{id}")]
         public async Task<ActionResult> BuscarUsuarioPorIdAsync(
            [FromServices] Context context,
            [FromRoute] Guid id)
         => Ok(await context.Usuario.Where(a => a.Id == id).ToListAsync());
+
+        [HttpGet("Novobuscarusuarioporid/{id}")]
+        public async Task<ActionResult> NovoBuscarUsuarioPorIdAsync(
+         [FromServices] Context context,
+         [FromRoute] Guid id)
+      => Ok(await context.Usuario.Where(a => a.Id == id).ToListAsync());
+
 
     }
 }

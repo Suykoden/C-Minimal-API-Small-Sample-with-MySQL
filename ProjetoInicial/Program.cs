@@ -11,8 +11,10 @@ using ProjetoInicial.Repository.Usuarios;
 using ProjetoInicial.Servicos.UsuarioServices;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<Context>();
+
 
 builder.Services.AddScoped<ILibGenerica, LibGenerica>();
 builder.Services.AddScoped<IFactoryBase<Usuario>, UsuarioFactory>();
